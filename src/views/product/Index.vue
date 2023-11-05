@@ -294,15 +294,16 @@
                                         <h2> $ {{  product.price }} USD <del> $65 USD</del></h2>
                                         <h6> In stuck</h6>
                                       </div>
-                                      <div class="color-varient"> <a href="#0" class="color-name pink">
-                                          <span>Pink</span> </a> <a href="#0" class="color-name red">
-                                          <span>Red</span> </a>
-                                        <a href="#0" class="color-name yellow"><span>Yellow</span>
-                                        </a> <a href="#0" class="color-name blue">
-                                          <span>Blue</span>
-                                        </a> <a href="#0" class="color-name black">
-                                          <span>Black</span> </a>
+                                      <div class="color-varient"> 
+                                        <template v-for="groupProduct in product.group_products">
+
+                                          <a v-for="color in groupProduct.colors" href="#0" :style="`background: #${color.title};`" class="color-name pink">
+                                              <span>{{color.title}}</span> 
+                                          </a> 
+
+                                        </template>
                                       </div>
+
                                       <div class="add-product">
                                         <h6>Qty:</h6>
                                         <div class="button-group">
@@ -339,6 +340,8 @@
 
                       </div>
                     </div>
+
+
                     <div class="tab-pane fade" id="pills-list" role="tabpanel" aria-labelledby="pills-list-tab">
                       <div class="row ">
                         <div class="col-12">
@@ -352,6 +355,7 @@
                             <div id="popupb" class="product-gird__quick-view-popup mfp-hide">
                               <div class="container">
                                 <div class="row justify-content-between align-items-center">
+
                                   <div class="col-lg-6">
                                     <div class="quick-view__left-content">
                                       <div class="tabs">
@@ -646,7 +650,7 @@
                                         <h6> In stuck</h6>
                                       </div>
                                       <div class="color-varient"> <a href="#0" class="color-name pink">
-                                          <span>Pink</span> </a> <a href="#0" class="color-name red"> <span>Red</span>
+                                          <span>Pinkddd</span> </a> <a href="#0" class="color-name red"> <span>Red</span>
                                         </a> <a href="#0" class="color-name yellow"><span>Yellow</span>
                                         </a> <a href="#0" class="color-name blue">
                                           <span>Blue</span> </a> <a href="#0" class="color-name black">
@@ -1695,12 +1699,18 @@
                                         <h2> $40 USD <del> $99 USD</del></h2>
                                         <h6> In stuck</h6>
                                       </div>
-                                      <div class="color-varient"> <a href="#0" class="color-name pink">
-                                          <span>Pink</span> </a> <a href="#0" class="color-name red"> <span>Red</span>
-                                        </a> <a href="#0" class="color-name yellow"><span>Yellow</span>
-                                        </a> <a href="#0" class="color-name blue">
-                                          <span>Blue</span> </a> <a href="#0" class="color-name black">
-                                          <span>Black</span> </a> </div>
+
+                                      <!-- Colors -->
+                                      <div class="color-varient">
+                                      
+
+                                          <a href="#0" class="color-name pink">
+                                              <span></span> 
+                                          </a> 
+                                       
+                                      </div>
+                                      <!-- End Colors -->
+
                                       <div class="add-product">
                                         <h6>Qty:</h6>
                                         <div class="button-group">
@@ -1797,6 +1807,7 @@ export default {
       this.axios.get('http://127.0.0.1:8001/api/products')
         .then(res => {
           this.products = res.data.data
+          console.log(res)
         })
       .finally(v => {
         $(document).trigger('change')
