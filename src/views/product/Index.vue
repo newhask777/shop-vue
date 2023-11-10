@@ -1787,6 +1787,7 @@ export default {
   mounted() {
     $(document).trigger('change')
     this.getProducts()
+    this.getFilterList()
   },
 
   data() {
@@ -1813,6 +1814,17 @@ export default {
       this.axios.get(`http://127.0.0.1:8000/api/product/${id}`)
         .then(res => {
           this.popupProduct = res.data.data
+          console.log(res)
+        })
+      .finally(v => {
+        $(document).trigger('change')
+      })
+    },
+
+    getFilterList() {
+      this.axios.get(`http://127.0.0.1:8000/api/product/filters`)
+        .then(res => {
+          // this.popupProduct = res.data.data
           console.log(res)
         })
       .finally(v => {
